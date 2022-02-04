@@ -32,6 +32,7 @@ class MAIN:
                 self.game_over()
     def game_over(self):
         sys.exit()
+        
 class SNAKE:
     def __init__(self):
         self.body = [Vector2(5,10), Vector2(4,10), Vector2(3,10)]
@@ -59,7 +60,6 @@ class SNAKE:
     def add_block(self):
         self.new_block = True
 
-
 class FRUIT:
     def __init__(self):
         self.x = random.randint(0, cell_number - 1 ) # x pos
@@ -68,7 +68,8 @@ class FRUIT:
     
     def draw_fruit(self):
         fruit_rect = pygame.Rect(self.pos.x * cell_size,self.pos.y * cell_size,cell_size,cell_size)
-        pygame.draw.rect(screen,(126,166,114),fruit_rect)
+        screen.blit(apple,fruit_rect)
+        #pygame.draw.rect(screen,(126,166,114),fruit_rect)
 
     def randomize(self):
         self.x = random.randint(0, cell_number - 1 ) # x pos
@@ -83,7 +84,7 @@ cell_size = 40
 cell_number = 20
 screen = pygame.display.set_mode((cell_size * cell_number,cell_size * cell_number))
 clock = pygame.time.Clock()# helps in fps lock(so game speed is same in every pc)
-
+apple = pygame.image.load("snake_game/resources/apple.png").convert_alpha()
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE,150)# 150 is in milliseconds
 
