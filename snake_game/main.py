@@ -24,7 +24,7 @@ class MAIN:
         
         for block in self.snake.body[1:]:
             if block == self.fruit.pos:
-                self.fruit.randomiz()
+                self.fruit.randomize()
     
     def check_fail(self):
         if not 0<= self.snake.body[0].x < cell_number:
@@ -80,7 +80,8 @@ class SNAKE:
             x_pos = int(block.x) * cell_size
             y_pos = int(block.y) * cell_size
             block_rect = pygame.Rect(x_pos, y_pos,cell_size,cell_size)
-            pygame.draw.rect(screen,(13,111,122),block_rect)
+            screen.blit(block1,block_rect)
+            #pygame.draw.rect(screen,(13,111,122),block_rect)
     
     def move_snake(self):
         if self.new_block == True:
@@ -125,6 +126,7 @@ cell_number = 20
 screen = pygame.display.set_mode((cell_size * cell_number,cell_size * cell_number))
 clock = pygame.time.Clock()# helps in fps lock(so game speed is same in every pc)
 apple = pygame.image.load("snake_game/resources/apple.png").convert_alpha()
+block1 = pygame.image.load("snake_game/resources/block.png").convert_alpha()
 game_font = pygame.font.Font("snake_game/resources/Dancing Minotaur.ttf",25)
 
 SCREEN_UPDATE = pygame.USEREVENT
