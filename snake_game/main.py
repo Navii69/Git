@@ -21,6 +21,10 @@ class MAIN:
         if self.fruit.pos == self.snake.body[0]:
             self.fruit.randomize()
             self.snake.add_block()
+        
+        for block in self.snake.body[1:]:
+            if block == self.fruit.pos:
+                self.fruit.randomiz()
     
     def check_fail(self):
         if not 0<= self.snake.body[0].x < cell_number:
@@ -32,8 +36,9 @@ class MAIN:
         for block in self.snake.body[1:]:
             if block == self.snake.body[0]:
                 self.game_over()
+
     def game_over(self):
-        sys.exit()
+        self.snake.reset()
 
     def draw_grass(self):
         grass_color = (167,209,61)
@@ -67,7 +72,7 @@ class MAIN:
 class SNAKE:
     def __init__(self):
         self.body = [Vector2(5,10), Vector2(4,10), Vector2(3,10)]
-        self.direction = Vector2(1,0)
+        self.direction = Vector2(0,0)
         self.new_block = False
 
     def draw_snake(self):
@@ -91,6 +96,10 @@ class SNAKE:
     def add_block(self):
         self.new_block = True
 
+    def reset(self):
+        self.body = [Vector2(5,10), Vector2(4,10), Vector2(3,10)]
+        self.direction = Vector2(0,0)
+        
 class FRUIT:
     def __init__(self):
         self.x = random.randint(0, cell_number - 1 ) # x pos
