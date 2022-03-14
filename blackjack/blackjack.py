@@ -1,23 +1,31 @@
-var,cash,var2=1,250,2
+var,cash,var2=1,500,2
 bjval=['2','2','2','2','3','3','3', '3','4','4','4', '4','5','6','7','8','9', '10','J','K','Q', 'A']
 bjfaceval=['J','K','Q']
 player=None
 bot=None
 player_ace,bot_ace=0,0
 import random
-from rich import print
+from rich import print as print
+import sys
+from rich.progress import track
+from time import sleep
+from rich.console import Console
+
+for i in track(range(100), description='[green]Processing data'):
+    sleep(0.015)
+console = Console()
 print("[#A1045A]Welcome to BlackJack[/#A1045A]")
 #USER DEFINED FUNCTIONS_______________________________________
 def cardsshow(a):
-    print("Dealer-\nCards: ")
+    print("[#d279a6]Dealer-\nCards: [/#d279a6]")
     for i in range(0,a):
         print(bot[i],end=' ')
-    print("\nTotal: ",botpoints)
+    print("[#d279a6]\nTotal: [/#d279a6]",botpoints)
     print("______________")
-    print("You-\nCards: ")
+    print("[#FFB6C1]You-\nCards: [/#FFB6C1]")
     for j in range(0,a):
         print(player[j],end=' ')
-    print("\nTotal: ",playerpoints)
+    print("[#FFB6C1]\nTotal: [/#FFB6C1]",playerpoints)
     
 #_____________________________________________________
 def cards(a):
@@ -30,39 +38,40 @@ def cards(a):
     print("[#FFB6C1]\nTotal: [/#FFB6C1]",playerpoints)
 #_____________________________________________________
 def stand():
-        print('▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬')
+        print('[#c56363]▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬[/#c56363]')
         global cash
         if playerpoints>botpoints:
-            print("YOU WON")
+            print("[#FFA500]YOU WON[/#FFA500]")
             cash+=cash_to_bid*2
-            print("Your cash now is",cash)
+            print("[#d1dd24]Your cash now is[/#d1dd24]",cash)
         elif playerpoints<botpoints:
-            print("YOU LOST")
-            print("Your cash now is",cash)
+            print("[#FFA500]YOU LOST[/#FFA500]")
+            print("[#d1dd24]Your cash now is[/#d1dd24]",cash)
         else:
-            print("TIED")
+            print("[#FFA500]TIED[/#FFA500]")
             cash+=cash_to_bid
-            print("Your cash now is",cash)
+            print("[#d1dd24]Your cash now is[/#d1dd24]",cash)
 #__________________________________________
 def situation():
         global cash,con
+        print('[#c56363]▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬[/#c56363]')
         if playerpoints==21:
-            print("YOU WON")
+            print("[#FFA500]YOU WON[/#FFA500]")
             cash+=cash_to_bid*2
-            print("Your cash now is",cash)
+            print("[#d1dd24]Your cash now is[/#d1dd24]",cash)
             con=1
         elif playerpoints>21:
-            print("YOU LOST")
-            print("Your cash now is",cash)
+            print("[#FFA500]YOU LOST[/#FFA500]")
+            print("[#d1dd24]Your cash now is[/#d1dd24]",cash)
             con=1
         elif botpoints==21:
-            print("YOU LOST")
-            print("Your cash now is",cash)
+            print("[#FFA500]YOU LOST[/#FFA500]")
+            print("[#d1dd24]Your cash now is[/#d1dd24]",cash)
             con=1
         elif botpoints>21:
-            print("YOU WON")
+            print("[#FFA500]YOU WON[/#FFA500]")
             cash+=cash_to_bid*2
-            print("Your cash now is",cash)
+            print("[#d1dd24]Your cash now is[/#d1dd24]",cash)
             con=1
 #__________________________________________
 def points():
@@ -95,33 +104,35 @@ def points():
 #_____________________________________________
 def res():
     global var,var2
-    restart=int(input("Do you wanna play again\nWrite 1 for YES and 2 for NO: "))
+    restart=int(console.input("[#bd8a4e]Do you wanna play again\nWrite 1 for YES and 2 for NO: [/#bd8a4e]"))
     if restart==1:
         var2=1
     elif restart==2:
-        print("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\nHave a great time\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬")
+        print("[#48c2ce]▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\nHave a great time\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬[/#48c2ce]")
         var=2
-        pass
+        sys.exit()
+
 #START_______________________________________________________
 while var==1:
-    var2,con=2,0
+    con=0
     random.shuffle(bjval)
-    bjstartmenu=int(input('▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n1.Start\n2.View Cash\n3.Exit\nEnter you choice: '))
+    bjstartmenu=int(console.input("▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬[#da1d4b]\n1.Start[/#da1d4b]\n[#d1dd24]2.View Cash[/#d1dd24]\n[#48c2ce]3.Exit[/#48c2ce]\n[#da1d4b]Enter you choice: [/#da1d4b]"))
     if bjstartmenu==3:
-        print("Have a great time")
-        break
+        print("[#48c2ce]Have a great time[/#48c2ce]")
+        sys.exit()
 #_________________________________________________________________
     elif bjstartmenu==2:
-        print('You have', cash)
+        print('[#d1dd24]You have[/#d1dd24]', cash)
         continue
 #________________________________________________________________
     elif bjstartmenu==1:
-        cash_to_bid=int(input("Enter the amount you wanna bid: "))
+        var2 = 2 
+        cash_to_bid=int(console.input("[#0218f1]Enter the amount you wanna bid: [/#0218f1]"))
         if cash_to_bid>cash:
-            print("You dont have enough cash")
+            print("[#0218f1]You dont have enough cash[/#0218f1]")
             continue
         elif cash_to_bid<125:
-            print("Minimum value to bid is  125")
+            print("[#0218f1]Minimum value to bid is  125[/#0218f1]")
             continue
         else:
             cash-=cash_to_bid
@@ -145,7 +156,7 @@ while var==1:
                         cardsshow(a)
                         res()
     #FIRST CODE PHASE COMPLETED.$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-                    choice=int(input("1 for Hit and 2 for Stand: "))
+                    choice=int(console.input("[#8d02f1]1 for Hit and 2 for Stand: [/#8d02f1]"))
     #RANDOM CARD DISTRIBUTION SECOND PHASE__________________________
                     if choice==1:
                         player.append(random.choice(bjval))
@@ -160,7 +171,7 @@ while var==1:
                             cardsshow(a)
                             res()
     #SECOND PHASE CODE COMPLETED________________________________
-                        choice_second=int(input("Press 1 to Hit and 2 to Stand: "))
+                        choice_second=int(console.input("[#8d02f1]Press 1 to Hit and 2 to Stand: [/#8d02f1]"))
     #THIRD PHASE CODE_________________________________________________
                         if choice_second==1:
                             player.append(random.choice(bjval))
@@ -175,7 +186,7 @@ while var==1:
                                 cardsshow(a)
                                 res()
     #THIRD PHASE CODE COMPLETED_____________________________
-                            choice_third=int(input("Press 1 to Hit and 2 to Stand: "))
+                            choice_third=int(console.input("[#8d02f1]Press 1 to Hit and 2 to Stand: [/#8d02f1]"))
     #FOURTH PHASE CODE_________________________________________________
                             if choice_third==1:
                                 player.append(random.choice(bjval))
@@ -190,9 +201,9 @@ while var==1:
                                     cardsshow(a)
                                     res()
     #FOURTH PHASE COMPLETED_________________________________________
-                                choice_fourth=int(input("Press 2 to Stand and 0 to Fofeit"))
+                                choice_fourth=int(console.input("[#8d02f1]Press 1 to Stand and 0 to Fofeit[/#8d02f1]"))
     #STAND SITUATION(FOURTH PHASE)_________________________________________
-                                if choice_fourth==2:
+                                if choice_fourth==1:
                                     stand()
                                     a=5
                                     cardsshow(a)

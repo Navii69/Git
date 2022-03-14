@@ -127,10 +127,14 @@ screen = pygame.display.set_mode((cell_size * cell_number,cell_size * cell_numbe
 clock = pygame.time.Clock()# helps in fps lock(so game speed is same in every pc)
 apple = pygame.image.load("snake_game/resources/apple.png").convert_alpha()
 block1 = pygame.image.load("snake_game/resources/block.png").convert_alpha()
+icon = pygame.image.load("snake_game/resources/snake.png").convert_alpha
 game_font = pygame.font.Font("snake_game/resources/Dancing Minotaur.ttf",25)
 
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE,150)# 150 is in milliseconds
+# Title and logo
+#pygame.display.set_icon(screen,icon)
+#pygame.display.set_caption("Snake Game")
 
 main_game = MAIN()
 # Game Loop
